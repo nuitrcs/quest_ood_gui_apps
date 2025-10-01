@@ -58,8 +58,34 @@ fi
 
 # Load the required environment
 module load <%= context.version %>
-
-# Launch MATLAB
 module list
+
 set -x
+# Depending on the application, what you run might be unique
+
+#### ABAQUS
+<%- if context.runcommand == "abaqus" %>
+# Need to set LANG for plugins to work
+export LANG="en_US.UTF-8"
+export ABAQUS_USE_LOCALIZATION=1
+
+# Launch Abaqus
+set -x
+abaqus cae -mesa \
+  |& tee "<%= session.staged_root.join("abaqus.log") %>"
+ABAQUS_EXIT_CODE=${PIPESTATUS[0]}
+{ set +x; } 2>/dev/null
+
+if [[ ${ABAQUS_EXIT_CODE} -ne 0 ]]; then
+cat | xmessage -file - -center <<- EOL
+ABAQUS/CAE died with the following output:
+
+$(cat "<%= session.staged_root.join("abaqus.log") %>")
+EOL
+fi
+
+<%- else %>
+### EVERYTHING ELSE
 <%= context.runcommand %>
+
+<%- end %>

@@ -1,21 +1,16 @@
 ---
-title: MATLAB
-caption: "MATLAB"
+title: Chimera X
+caption: "Chimera X"
 description: |
-  This app will launch a [MATLAB] GUI on the [Quest cluster]. You will be able
-  to interact with the MATLAB GUI through a VNC session.
+  This app will launch the Chimera X GUI on the [Quest cluster].
 
-  Please see [Using Matlab on Quest] for more information about Matlab on HPC.
-
-  [MATLAB]: https://www.mathworks.com/products/matlab.html
   [Quest cluster]: https://www.it.northwestern.edu/departments/it-services-support/research/computing/quest/index.html
-  [Using Matlab on Quest]: https://services.northwestern.edu/TDClient/30/Portal/KB/ArticleDet?ID=1548
-icon: "/public/logo.png"
+icon: fa://desktop
 form:
   # What version of the code do you want to run
   - version
   - container
-  - run_command
+  - runcommand
   # This allows the user to select which partition they submit to
   - slurm_partition
   # This allows a user to request a GPU
@@ -43,24 +38,18 @@ form:
   - raw_group_data
 attributes:
   version:
-    display: true
     widget: select
-    label: "Matlab version"
-    help: "This defines the version of Matlab you want to load."
+    label: "Chimera X"
+    help: "What version of Chimera X would you like to launch"
     options:
-      - [ "MATLAB-2024a", "matlab/r2024a" ]
-      - [ "MATLAB-2023b", "matlab/r2023b" ]
-      - [ "MATLAB-2022b", "matlab/r2022b" ]
-      - [ "MATLAB-2022a", "matlab/r2022a" ]
-      - [ "MATLAB-2021b", "matlab/r2021b" ]
-      - [ "MATLAB-2020b", "matlab/r2020b" ]
+      - [ "Chimera X 1.10.1", "" ]
 
   container:
-    value: "/software/rhel8/quest_ondemand/desktops/xfce/quest-ood-xfce-desktop.sif"
     widget: hidden_field
     cacheable: false
+    value: "/gpfs/projects/a9009/hsc945/sing_containers/chimerax-1.10.1.sif"
 
-  run_command:
-    value: "matlab -desktop"
+  runcommand:
     widget: hidden_field
     cacheable: false
+    value: "chimerax"

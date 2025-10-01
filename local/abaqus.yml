@@ -1,15 +1,12 @@
 ---
-title: ANSYS Workbench or EDT
-caption: "ANSYS Workbench or EDT"
+title: Abaqus
+caption: "Abaqus"
 description: |
-    This app will launch either [ANSYS Workbench] or ANSYS Electronics Desktop within a [Turbo VNC] server on the
-    [Quest cluster].
+    This OnDemand interactive app will launch [Abaqus/CAE] on a Quest compute node.
 
-    The ANSYS Network License is restricted to authorized groups only (researchers in McCormick), contact quest-help@northwestern.edu for assistance. As a condition for use, users agree to comply with University policy on [Appropriate Use of Electronic Resources], [Use and Copying of Computer Software], and [Best Practices for Securing Devices].
+    The ABAQUS Network License is restricted to authorized groups only, contact quest-help@northwestern.edu for assistance. As a condition for use, users agree to comply with University policy on [Appropriate Use of Electronic Resources], [Use and Copying of Computer Software], and [Best Practices for Securing Devices].
 
-    [ANSYS Workbench]: https://www.ansys.com/
-    [Turbo VNC]: https://www.turbovnc.org/
-    [Quest cluster]: https://www.it.northwestern.edu/departments/it-services-support/research/computing/quest/index.html
+    [Abaqus/CAE]: https://www.3ds.com/products-services/simulia/products/abaqus/abaquscae/
     [Best Practices for Securing Devices]: https://www.it.northwestern.edu/security/device-tips.html
     [Use and Copying of Computer Software]: https://www.it.northwestern.edu/policies/software.html
     [Appropriate Use of Electronic Resources]: https://policies.northwestern.edu/docs/appropriate-use-policy-final.pdf
@@ -47,28 +44,24 @@ form:
 attributes:
   version:
     widget: select
-    label: "ANSYS or ANSYSEDT Module"
-    help: "This defines the version of ANSYS you want to load."
+    label: "Abaqus version"
+    help: "This defines the version of Abaqus you want to load."
+    required: true
     options:
-      - [
-          'ANSYS Workbench 2025 R1', 'ansys/2025R1',
-          data-set-runcommand: 'runwb2 -oglmesa',
-        ]
-      - [ 
-          'ANSYS Workbench 2023 R2', 'ansys/2023R2',
-          data-set-runcommand: 'runwb2 -oglmesa',
-        ]
-      - [
-          'ANSYS Electronics Desktop 2023R2', 'ansysedt/2023R2 intel/2013.2',
-          data-set-runcommand: 'ansysedt',
-        ]
+      - [ "abaqus2025", "abaqus/2025" ]
+      - [ "abaqus2022", "abaqus/2022" ]
+      - [ "abaqus2021", "abaqus/2021" ]
+      - [ "abaqus2020", "abaqus/2020" ]
+      - [ "abaqus2019", "abaqus/2019" ]
+      - [ "abaqus2017", "abaqus/2017" ]
+      - [ "abaqus2016", "abaqus/2016" ]
 
   container:
     widget: hidden_field
     cacheable: false
-    value: "/software/rhel8/quest_ondemand/quest_ood_ansys/ansys-xfce-ubi810-ood.sif"
+    value: "/software/rhel8/quest_ondemand/desktops/xfce/quest-ood-xfce-desktop.sif"
 
   runcommand:
     widget: hidden_field
     cacheable: false
-    value: ""
+    value: "abaqus"

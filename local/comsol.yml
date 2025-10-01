@@ -1,0 +1,71 @@
+---
+title: COMSOL Multiphysics
+caption: "COMSOL Multiphysics"
+description: |
+  This app will launch a [COMSOL Multiphysics] GUI on the [Quest cluster].
+  You will be able to interact with the COMSOL GUI through a VNC session.
+
+  Although we have three COMSOL modules on Quest, there use is restricted to certain groups.
+
+  * comsol/6.0_mse_emery, comsol/6.2_mse_emery or comsol/6.3_mse_emery : Researchers in Materials Science and Engineering who have been given approval to use this COMSOL installation on Quest by Professor Jonathan Daniel Emery.
+  * comsol/6.3_sun_lab : Researchers in the Cheng Sun Lab who have been given approval.
+  * comsol/6.1_koch : Researchers in the Jens Koch Lab who have been given approval.
+  * comsol/6.0_upgrade : Researchers in the Monica Olvera de la Cruz Lab who have been given approval.
+  * comsol/6.0 : Researchers in the Selim Shahriar Lab who have been given approval.
+
+  [COMSOL Multiphysics]: https://www.comsol.com
+  [Quest cluster]: https://www.it.northwestern.edu/departments/it-services-support/research/computing/quest/index.html
+icon: "/public/matlab.png"
+form:
+  # What version of the code do you want to run
+  - version
+  - container
+  - runcommand
+  # This allows the user to select which partition they submit to
+  - slurm_partition
+  # This allows a user to request a GPU
+  - gres_value
+  # This allows a user to specify the account they are submitting under
+  - slurm_account
+  # This allows a user to use more than 1 core
+  - num_cores
+  # This checkbox is to encourage folks to consider before asking for more than 1 node
+  - request_more_than_one_node
+  # how many nodes do you want to request
+  - number_of_nodes
+  # This allows a user to request RAM
+  - memory_per_node
+  # How many hours do you want to run this job for
+  - bc_num_hours
+  # User can supply e-mail if they would like to be e-mailed when the session begins
+  - user_email
+  # Allow the user to provide a Slurm "constraint" option
+  - constraint
+  # Name of the Slurm job
+  - job_name
+  # these variables are for the JavaScript
+  - raw_data
+  - raw_group_data
+attributes:
+  version:
+    widget: select
+    label: "COMSOL Module"
+    help: "This defines the version of COMSOL you want to load."
+    options:
+      - [ "COMSOL 6.3 MSE Emery", "comsol/6.3_mse_emery" ]
+      - [ "COMSOL 6.2 MSE Emery", "comsol/6.2_mse_emery" ]
+      - [ "COMSOL 6.0 MSE Emery", "comsol/6.0_mse_emery" ]
+      - [ "COMSOL 6.1 Jens Koch", "comsol/6.1_koch" ]
+      - [ "COMSOL 6.0 Monica Olvera de la Cruz Lab", "comsol/6.0_upgrade" ]
+      - [ "COMSOL 6.0 Selim Shahriar Lab", "comsol/6.0" ]
+      - [ "COMSOL 6.3 Cheng Sun Lab", "comsol/6.3_sun_lab" ]
+
+  container:
+    widget: hidden_field
+    cacheable: false
+    value: "/software/rhel8/quest_ondemand/desktops/xfce/quest-ood-xfce-desktop.sif"
+
+  runcommand:
+    widget: hidden_field
+    cacheable: false
+    value: "comsol -3drend sw"
