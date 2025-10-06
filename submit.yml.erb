@@ -49,6 +49,30 @@ batch_connect:
 
     ## bind some extra stuff to be able to talk to slurm from within the container
     export SING_BINDS="$SING_BINDS -B /usr/local/pmix -B /usr/local/hwloc -B /usr/local/libevent -B /usr/local/spack_v20d1 -B /usr/local/ucx/ " 
+
+    
+    <%- if container.include? "deeplabcut" %>
+        <%- if container == "/hpc/software/deeplabcut/2.3.9/deeplabcut-ood.sif" %>
+        DEEPLABCUT_ARTIFICIAL_MODELS_DIR=$HOME/.deeplabcut/
+        DEEPLABCUT_MODELS_DIR=/usr/local/lib/python3.8/dist-packages/deeplabcut/pose_estimation_tensorflow/models/pretrained/
+        <%- elsif container == "/hpc/software/rhel8/quest_ondemand/quest_ood_deeplabcut/quest-ood-dlc.sif" %>
+        DEEPLABCUT_ARTIFICIAL_MODELS_DIR=$HOME/.deeplabcut_2d3d10/
+        DEEPLABCUT_MODELS_DIR=/miniconda/envs/deeplabcut-2.3.10/lib/python3.10/site-packages/deeplabcut/pose_estimation_tensorflow/models/pretrained/
+        <%- elsif container == "/hpc/software/rhel8/quest_ondemand/quest_ood_deeplabcut/quest-ood-dlc-3.0.0rc10.sif" %>
+        DEEPLABCUT_ARTIFICIAL_MODELS_DIR=$HOME/.deeplabcut_3d0d0rc10/
+        DEEPLABCUT_MODELS_DIR=/miniconda/envs/deeplabcut-3.0.0rc10/lib/python3.10/site-packages/deeplabcut/pose_estimation_tensorflow/models/pretrained/
+        <%- end %>
+        if [ ! -d $DEEPLABCUT_ARTIFICIAL_MODELS_DIR ]; then
+            mkdir -p $DEEPLABCUT_ARTIFICIAL_MODELS_DIR && singularity exec "${container_image}" cp -r $DEEPLABCUT_ARTIFICIAL_MODELS_DIR $DEEPLABCUT_MODELS_DIR;
+        fi;
+        <%- if container == "/hpc/software/rhel8/quest_ondemand/quest_ood_deeplabcut/quest-ood-dlc-3.0.0rc10.sif" %>
+        if [ ! -d "$HOME/.deeplabcut_3d0d0rc10/modelzoo/checkpoints" ]; then
+            mkdir -p $HOME/.deeplabcut_3d0d0rc10/modelzoo/checkpoints;
+        fi;
+        export SING_BINDS="$SING_BINDS -B $HOME/.deeplabcut_3d0d0rc10/modelzoo/checkpoints:/miniconda/envs/deeplabcut-3.0.0rc10/lib/python3.10/site-packages/deeplabcut/modelzoo/checkpoints "
+        <%- end %>
+        export SING_BINDS="$SING_BINDS -B $DEEPLABCUT_ARTIFICIAL_MODELS_DIR/pretrained:$DEEPLABCUT_MODELS_DIR "
+    <%- end %>
     
     # Need to add the --nv flag if we are running on a GPU
     <%- if gres_value != "" %>
@@ -57,6 +81,7 @@ batch_connect:
     export SING_GPU=""
     <%- end %>
 
+    echo $SING_BINDS
     singularity exec $SING_GPU $SING_BINDS "${container_image}" /bin/bash container.sh
 
   header: | 
