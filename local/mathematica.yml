@@ -1,11 +1,13 @@
 ---
-title: Chimera X
-caption: "Chimera X"
+title: Mathematica
+caption: "Mathematica"
 description: |
-  This app will launch the Chimera X GUI on the [Quest cluster].
+  This app will launch a [Mathematica] GUI on the [Quest cluster]. You will be able
+  to interact with the Mathematica GUI through a VNC session.
 
+  [Mathematica]: https://www.wolfram.com/mathematica/
   [Quest cluster]: https://www.it.northwestern.edu/departments/it-services-support/research/computing/quest/index.html
-icon: fa://desktop
+icon: "/public/logo.png"
 form:
   # What version of the code do you want to run
   - version
@@ -38,18 +40,22 @@ form:
   - raw_group_data
 attributes:
   version:
+    display: true
     widget: select
-    label: "Chimera X"
-    help: "What version of Chimera X would you like to launch"
+    label: "Mathematica version"
+    help: "This defines the version of Mathematica you want to load."
     options:
-      - [ "Chimera X 1.10.1", "" ]
+      - [ "Mathematica-13.2", "mathematica/13.2" ]
+      - [ "Mathematica-13.1", "mathematica/13.1.0" ]
+      - [ "Mathematica-12.0", "mathematica/12.0" ]
+      - [ "Mathematica-11.0.1", "mathematica/11.0.1" ]
 
   container:
+    value: "/software/rhel8/quest_ondemand/quest_ood_mathematica/mathematica-xfce-ubi810-ood.sif"
     widget: hidden_field
     cacheable: false
-    value: "/gpfs/software/2025/chimerax/1.10.1/chimerax-1.10.1.sif"
 
   runcommand:
+    value: "mathematica"
     widget: hidden_field
     cacheable: false
-    value: "chimerax"

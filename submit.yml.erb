@@ -38,7 +38,7 @@ batch_connect:
     if singularity exec ${container_image} grep -q fedora /etc/os-release; then
 
         #### IS THE CONTAINER RUNNING UBI8/RHEL*, THEN YOU NEED TO MOUNT SLURM INTO THE CONTAINER AS FOLLOWS ###
-        export SING_BINDS="$SING_BINDS -B /etc/slurm -B `which --skip-alias sbatch ` -B `which --skip-alias srun ` -B `which --skip-alias sacct ` -B `which --skip-alias scontrol ` -B `which --skip-alias salloc ` -B `which --skip-alias scancel ` -B `which --skip-alias squeue ` -B /usr/lib64/slurm/ -B /usr/lib64/libmunge.so.2 -B /usr/lib64/libmunge.so.2.0.0 -B /usr/lib64/libpmi2.so -B /usr/lib64/libpmi2.so.0 -B /usr/lib64/libpmi2.so.0.0.0 -B /usr/lib64/libpmi.so -B /usr/lib64/libpmi.so.0 -B /usr/lib64/libpmi.so.0.0.0 -B /run -B /usr/lib64/libnvidia-ml.so.1"
+        export SING_BINDS="$SING_BINDS -B /etc/slurm -B `which --skip-alias sbatch ` -B `which --skip-alias srun ` -B `which --skip-alias sacct ` -B `which --skip-alias scontrol ` -B `which --skip-alias salloc ` -B `which --skip-alias scancel ` -B `which --skip-alias squeue ` -B /usr/lib64/slurm/ -B /usr/lib64/libmunge.so.2 -B /usr/lib64/libmunge.so.2.0.0 -B /usr/lib64/libpmi2.so -B /usr/lib64/libpmi2.so.0 -B /usr/lib64/libpmi2.so.0.0.0 -B /usr/lib64/libpmi.so -B /usr/lib64/libpmi.so.0 -B /usr/lib64/libpmi.so.0.0.0 -B /run -B /usr/lib64/libnvidia-ml.so.1 -B /usr/lib64/libgpfs.so -B /usr/lib64/libucp.so.0 -B /usr/lib64/libuct.so.0 -B /usr/lib64/libucm.so.0 -B /usr/lib64/libucs.so.0"
 
     elif singularity exec ${container_image} grep -q debian /etc/os-release; then
 

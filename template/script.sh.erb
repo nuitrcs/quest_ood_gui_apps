@@ -98,6 +98,28 @@ while [[ -d "/proc/$stata_pid" ]]; do
   sleep 1
 done
 
+### MATHEMATICA
+<%- elsif context.runcommand == "mathematica" %>
+
+export MATHEMATICA_USERBASE="${HOME}/.Mathematica/rhel8"
+<%= context.runcommand %>
+
+<%- elsif context.runcommand == "relion" %>
+
+# Change into relion project directory
+cd '<%= context.relion_project_directory == "" ? "${HOME}" : context.relion_project_directory %>'
+
+# Load the required environment
+module load <%= context.version %>
+module load libpng/1.5.30-gcc-4.8.5
+
+
+# Launch RELION
+relion &
+
+sleep $(($SLURM_JOB_END_TIME - $SLURM_JOB_START_TIME))
+
+### QuPath
 <%- elsif context.runcommand == "qupath" %>
 
 eval "$(/miniconda/bin/conda shell.bash hook)" && \

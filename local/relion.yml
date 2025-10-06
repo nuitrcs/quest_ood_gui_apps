@@ -1,16 +1,18 @@
 ---
-title: Chimera X
-caption: "Chimera X"
+title: RELION
+caption: "RELION"
 description: |
-  This app will launch the Chimera X GUI on the [Quest cluster].
+  This app will launch the [RELION] GUI on the [Quest cluster].
 
+  [RELION]: https://relion.readthedocs.io/en/release-5.0/
   [Quest cluster]: https://www.it.northwestern.edu/departments/it-services-support/research/computing/quest/index.html
-icon: fa://desktop
+icon: "/public/matlab.png"
 form:
   # What version of the code do you want to run
   - version
   - container
   - runcommand
+  - relion_project_directory
   # This allows the user to select which partition they submit to
   - slurm_partition
   # This allows a user to request a GPU
@@ -39,17 +41,24 @@ form:
 attributes:
   version:
     widget: select
-    label: "Chimera X"
-    help: "What version of Chimera X would you like to launch"
+    label: "Relion version"
+    help: "What version of Relion would you like to launch"
     options:
-      - [ "Chimera X 1.10.1", "" ]
+      - [ "Relion 5.0 6331fe6", "relion/5.0" ]
+      - [ "Relion 5.0 85db7351", "relion/5.0-85db7351" ]
+
+  relion_project_directory:
+    label: "RELION project directory"
+    value: ""
+    help: |
+      If you leave this blank, the RELION project directory will default to your HOME folder.
 
   container:
     widget: hidden_field
     cacheable: false
-    value: "/gpfs/software/2025/chimerax/1.10.1/chimerax-1.10.1.sif"
+    value: "/software/rhel8/quest_ondemand/desktops/xfce/quest-ood-xfce-desktop.sif"
 
   runcommand:
     widget: hidden_field
     cacheable: false
-    value: "chimerax"
+    value: "relion"

@@ -15,7 +15,7 @@ form:
   # What version of the code do you want to run
   - version
   - container
-  - run_command
+  - runcommand
   # This allows the user to select which partition they submit to
   - slurm_partition
   # This allows a user to request a GPU
@@ -60,7 +60,7 @@ attributes:
     widget: hidden_field
     cacheable: false
 
-  run_command:
+  runcommand:
     value: "matlab -desktop"
     widget: hidden_field
     cacheable: false

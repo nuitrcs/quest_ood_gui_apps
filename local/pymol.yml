@@ -1,8 +1,8 @@
 ---
-title: Chimera X
-caption: "Chimera X"
+title: PyMOL Open Source
+caption: "PyMOL Open Source"
 description: |
-  This app will launch the Chimera X GUI on the [Quest cluster].
+  This app will launch the PyMOL GUI on the [Quest cluster].
 
   [Quest cluster]: https://www.it.northwestern.edu/departments/it-services-support/research/computing/quest/index.html
 icon: fa://desktop
@@ -39,17 +39,17 @@ form:
 attributes:
   version:
     widget: select
-    label: "Chimera X"
-    help: "What version of Chimera X would you like to launch"
+    label: "PyMOL"
+    help: "What version of PyMOL would you like to launch"
     options:
-      - [ "Chimera X 1.10.1", "" ]
+      - [ "PyMOL 3.11.1", "" ]
 
   container:
     widget: hidden_field
     cacheable: false
-    value: "/gpfs/software/2025/chimerax/1.10.1/chimerax-1.10.1.sif"
+    value: "/gpfs/software/rhel8/quest_ondemand/quest_ood_ovito/quest-ood-xfce-ovito-desktop.sif"
 
   runcommand:
     widget: hidden_field
     cacheable: false
-    value: "chimerax"
+    value: "/ovito-basic-3.11.1-x86_64/bin/ovito"

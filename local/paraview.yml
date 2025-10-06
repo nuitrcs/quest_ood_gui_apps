@@ -1,11 +1,12 @@
 ---
-title: Chimera X
-caption: "Chimera X"
+title: Paraview App
+caption: "Paraview App"
 description: |
-  This app will launch the Chimera X GUI on the [Quest cluster].
+  This app will launch the [Paraview App] GUI on the [Quest cluster].
 
+  [Paraview App]: https://www.paraview.org/
   [Quest cluster]: https://www.it.northwestern.edu/departments/it-services-support/research/computing/quest/index.html
-icon: fa://desktop
+icon: "/public/logo.png"
 form:
   # What version of the code do you want to run
   - version
@@ -39,17 +40,17 @@ form:
 attributes:
   version:
     widget: select
-    label: "Chimera X"
-    help: "What version of Chimera X would you like to launch"
+    label: "Paraview version"
+    help: "This defines the version of Paraview you want to load."
     options:
-      - [ "Chimera X 1.10.1", "" ]
+      - [ "Paraview 5.13.3", "paraview/5.13.3" ]
 
   container:
+    value: "/software/rhel8/quest_ondemand/quest_ood_ansys/ansys-xfce-ubi810-ood.sif"
     widget: hidden_field
     cacheable: false
-    value: "/gpfs/software/2025/chimerax/1.10.1/chimerax-1.10.1.sif"
 
   runcommand:
+    value: "paraview"
     widget: hidden_field
     cacheable: false
-    value: "chimerax"

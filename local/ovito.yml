@@ -1,9 +1,10 @@
 ---
-title: Chimera X
-caption: "Chimera X"
+title: Ovito
+caption: "Ovito"
 description: |
-  This app will launch the Chimera X GUI on the [Quest cluster].
+  This app will launch the [Ovito] GUI on the [Quest cluster].
 
+  [Ovito]: https://www.ovito.org/docs/current/index.html
   [Quest cluster]: https://www.it.northwestern.edu/departments/it-services-support/research/computing/quest/index.html
 icon: fa://desktop
 form:
@@ -39,17 +40,17 @@ form:
 attributes:
   version:
     widget: select
-    label: "Chimera X"
-    help: "What version of Chimera X would you like to launch"
+    label: "Ovito"
+    help: "What version of Ovito would you like to launch"
     options:
-      - [ "Chimera X 1.10.1", "" ]
+      - [ "Ovito 3.11.1", "" ]
 
   container:
     widget: hidden_field
     cacheable: false
-    value: "/gpfs/software/2025/chimerax/1.10.1/chimerax-1.10.1.sif"
+    value: "/gpfs/software/rhel8/quest_ondemand/quest_ood_ovito/quest-ood-xfce-ovito-desktop.sif"
 
   runcommand:
     widget: hidden_field
     cacheable: false
-    value: "chimerax"
+    value: "/ovito-basic-3.11.1-x86_64/bin/ovito"

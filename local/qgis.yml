@@ -1,9 +1,10 @@
 ---
-title: Chimera X
-caption: "Chimera X"
+title: QGIS
+caption: "QGIS"
 description: |
-  This app will launch the Chimera X GUI on the [Quest cluster].
+  This app will launch the [QGIS] GUI in a virtual desktop on [Quest].
 
+  [QGIS]: https://qgis.org/en/site/
   [Quest cluster]: https://www.it.northwestern.edu/departments/it-services-support/research/computing/quest/index.html
 icon: fa://desktop
 form:
@@ -39,17 +40,24 @@ form:
 attributes:
   version:
     widget: select
-    label: "Chimera X"
-    help: "What version of Chimera X would you like to launch"
+    label: "QGIS"
+    help: "What version of QGIS would you like to launch"
     options:
-      - [ "Chimera X 1.10.1", "" ]
+      - [
+          'QGIS 3.44', 'QGIS 3.44',
+          data-set-container: '/software/2025/qgis/v3.44/qgis-gee-firefox.sif',
+        ]
+      - [
+          'QGIS 3.36', 'QGIS 3.36',
+          data-set-container: '/software/qgis/v3.36.3/quest-ood-qgis-3.36.3.sif',
+        ]
 
   container:
     widget: hidden_field
     cacheable: false
-    value: "/gpfs/software/2025/chimerax/1.10.1/chimerax-1.10.1.sif"
+    value: ""
 
   runcommand:
     widget: hidden_field
     cacheable: false
-    value: "chimerax"
+    value: "qgis"
